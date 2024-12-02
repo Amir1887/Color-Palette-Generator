@@ -3,9 +3,11 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      Hello world
-    </div>
+   <>
+    <h1 className='font-bold underline text-center mt-52'>
+    GHW Open Source Week - Color Palette Palette Generator
+    </h1>
+   </>
   );
 }
 
