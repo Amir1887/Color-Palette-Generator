@@ -1,13 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import ColorInput from './components/ColorInput';
 
 function App() {
   return (
-   <>
-    <h1 className='font-bold underline text-center mt-52'>
-    GHW Open Source Week - Color Palette Palette Generator
+   <main className='mx-auto max-w-5xl lg:max-w-7xl px-6 py-12'>
+    <h1 className='text-4xl font-medium  text-center'>
+    GHW Open Source Week - Color Palette Generator
     </h1>
-   </>
+    <section className='p-1 border-2 rounded-xl mt-10'>
+      <h2>Input a Color</h2>
+      <ColorInput/>
+    </section>
+   </main>
   );
 }
 
