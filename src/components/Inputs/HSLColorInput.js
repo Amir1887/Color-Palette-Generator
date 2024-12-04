@@ -13,7 +13,7 @@ function HSLColorInput({hsl, onHslChange}) {
         max={360}
         placeholder="H"
         value={h}
-        onChange={(e) => onHslChange(0, parseInt(e.target.value || 0))}
+        onChange={(e) => onHslChange(0, parseFloat(e.target.value || 0))}
         className="border-2 border-slate-300 rounded-lg w-full px-2 py-1"
       />
       <input
@@ -22,7 +22,7 @@ function HSLColorInput({hsl, onHslChange}) {
         max={100}
         placeholder="S"
         value={s}
-        onChange={(e) => onHslChange(1, parseInt(e.target.value || 0))}
+        onChange={(e) => onHslChange(1, parseFloat(e.target.value || 0))}
         className="border-2 border-slate-300 rounded-lg w-full px-2 py-1"
       />
       <input
@@ -31,7 +31,7 @@ function HSLColorInput({hsl, onHslChange}) {
         max={100}
         placeholder="L"
         value={l}
-        onChange={(e) => onHslChange(2 , parseInt(e.target.value || 0))}
+        onChange={(e) => onHslChange(2 , parseFloat(e.target.value || 0))}
         className="border-2 border-slate-300 rounded-lg w-full px-2 py-1"
       />
       </div>
