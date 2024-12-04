@@ -3,6 +3,7 @@ import chroma from 'chroma-js'
 import HexColorInput from './Inputs/HexColorInput'
 import RGColorInput from './Inputs/RGColorInput'
 import HSLColorInput from './Inputs/HSLColorInput'
+import ColorPreview from './Inputs/ColorPreview'
 
 function ColorInput() {
     const [chromaColor, setChromaColor] = useState(chroma("#4512ab"));
@@ -44,7 +45,8 @@ const handleHEXChange = (value) => {
 };
 
   return (
-    <div className='bg-cyan-300 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-y-2 lg:gap-y-0 max-w-50'>
+    <div className='bg-cyan-300 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-y-2 lg:gap-y-0 '>
+      <ColorPreview color={chromaColor.css()}/>
       <HexColorInput hexInput={hexInput} setHexInput={handleHEXChange}/>
       <RGColorInput rgbInput={rgbValues} setRgbInput={handleRGBChange}/>
       <HSLColorInput hsl={hslValues} onHslChange={handleHSLChange} />
