@@ -1,15 +1,35 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import chroma from 'chroma-js'
+
 import HexColorInput from './Inputs/HexColorInput'
 import RGColorInput from './Inputs/RGColorInput'
 import HSLColorInput from './Inputs/HSLColorInput'
 import ColorPreview from './Inputs/ColorPreview'
+import useDebounce from '../hooks/useDebounce'
+
 
 function ColorInput() {
     const [chromaColor, setChromaColor] = useState(chroma("#4512ab"));
     const [hexInput, setHexInput] = useState(chromaColor);
     const [rgbValues, setRgbValues] = useState(chromaColor.rgb());
     const [hslValues, setHslValues] = useState(chromaColor.hsl());
+
+    const debouncedHexInput = useDebounce(hexInput, 1000);
+    useEffect(() => {
+      if (chroma.valid(debouncedHexInput)) {
+        const newColor = chroma(debouncedHexInput);
+        setChromaColor(newColor); // Update the chroma color state
+        setRgbValues(newColor.rgb()); // Update the RGB values
+        setHslValues(newColor.hsl()); // Update the HSL values
+      } else {
+        toast.error(`1* Invalid Color: ${hexInput}`);
+      }
+      return ()=>{
+        toast.dismiss();
+      }
+    }, [debouncedHexInput]);
+    
 
 const handleRGBChange = (index, value) => {
     const newRGB = [...rgbValues];
@@ -34,14 +54,13 @@ setRgbValues(newColor.rgb());
 
 const handleHEXChange = (value) => {
   setHexInput(value); // Update the HEX input state immediately
-  if (chroma.valid(value)) { // convert to other formats only if the value is a valid HEX code
+  const isHexValid = (hex) => /^#([0-9A-F]{3}){1,2}$/i.test(hex);
+  if (isHexValid(value) && chroma.valid(value)) { // convert to other formats only if the value is a valid HEX code
     const newColor = chroma(value);
     setChromaColor(newColor); // Update the chroma color state
     setRgbValues(newColor.rgb()); // Update the RGB values
     setHslValues(newColor.hsl()); // Update the HSL values
-  } else {
-    console.warn("Invalid HEX input"); // Log a warning for invalid inputs
-  }
+  } 
 };
 
   return (
