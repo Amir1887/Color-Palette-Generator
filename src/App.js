@@ -8,8 +8,7 @@ function App() {
     <h1 className='text-4xl font-medium  text-center'>
     GHW Open Source Week - Color Palette Generator
     </h1>
-    <section className='p-1 border-2 rounded-xl mt-10'>
-      <h2>Input a Color</h2>
+    <section className='p-1 border-2 rounded-xl mt-10 '>
       <ColorInput/>
     </section>
    </main>

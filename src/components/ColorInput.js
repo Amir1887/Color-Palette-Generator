@@ -19,8 +19,7 @@ const handleHSLChange = (index, value) => {
     setHslValues(newHSL);
 }
   return (
-    <div className='bg-cyan-300 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-y-2 lg:gap-y-0'>
-      <p>Color Input</p> 
+    <div className='bg-cyan-300 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-y-2 lg:gap-y-0 max-w-50'>
       <HexColorInput hexInput={hexInput} setHexInput={setHexInput}/>
       <RGColorInput rgbInput={rgbValues} setRgbInput={handleRGBChange}/>
       <HSLColorInput hsl={hslValues} onHslChange={handleHSLChange} />
