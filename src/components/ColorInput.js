@@ -9,6 +9,17 @@ import ColorPreview from './Inputs/ColorPreview'
 import useDebounce from '../hooks/useDebounce'
 
 
+/**
+ * RGB Color Input Component
+ * 
+ * This component allows the user to input RGB values using number inputs and sliders.
+ *
+ * @param {Object} props - Component props.
+ * @param {number[]} props.rgbInput - Current RGB values as an array [R, G, B].
+ * @param {function} props.setRgbInput - Function to update RGB values.
+ * @returns {JSX.Element} A rendered RGB input form.
+ */
+
 function ColorInput() {
     const [chromaColor, setChromaColor] = useState(chroma("#4512ab"));
     const [hexInput, setHexInput] = useState(chromaColor);
@@ -31,6 +42,11 @@ function ColorInput() {
     }, [debouncedHexInput]);
     
 
+    /**
+     * handle the change of rgb color, You can destructure it to get r, g, b 
+     * @param {index} index 
+     * @param {value} value 
+     */
 const handleRGBChange = (index, value) => {
     const newRGB = [...rgbValues];
     newRGB[index] = value
