@@ -7,6 +7,7 @@ import RGColorInput from './Inputs/RGColorInput'
 import HSLColorInput from './Inputs/HSLColorInput'
 import ColorPreview from './Inputs/ColorPreview'
 import useDebounce from '../hooks/useDebounce'
+import GenerateContrastGrid from './ContrastChecker/GenerateContrastGrid'
 
 
 /**
@@ -26,6 +27,10 @@ function ColorInput() {
     const [rgbValues, setRgbValues] = useState(chromaColor.rgb());
     const [hslValues, setHslValues] = useState(chromaColor.hsl());
 
+    const [generatedColor, setGeneratedColor] = useState(null);
+    const handleGeneratedColor = ()=>{
+      setGeneratedColor(chromaColor);
+    }
     const debouncedHexInput = useDebounce(hexInput, 1000);
     useEffect(() => {
       if (chroma.valid(debouncedHexInput)) {
@@ -80,11 +85,25 @@ const handleHEXChange = (value) => {
 };
 
   return (
+    <div>
     <div className='bg-cyan-300 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-y-2 lg:gap-y-0 '>
       <ColorPreview color={chromaColor.css()}/>
       <HexColorInput hexInput={hexInput} setHexInput={handleHEXChange}/>
       <RGColorInput rgbInput={rgbValues} setRgbInput={handleRGBChange}/>
       <HSLColorInput hsl={hslValues} onHslChange={handleHSLChange} />
+    </div>
+
+    {/* automatic generation of contrast  */}
+    <div>
+     <p className='mt-3 mb-2'><span className='p-2 mt-3 border-2 border-slate-200 text-slate-300 rounded-lg ' style={{background: chromaColor}}>Contrast Grid</span></p> 
+    <GenerateContrastGrid baseColor={chromaColor}/>
+    </div>
+
+{/*  Mannual generation of contrast 
+    <div>
+      <button onClick={handleGeneratedColor}>Generate Color</button>
+      <GenerateContrastGrid baseColor={generatedColor}/>
+    </div> */}
     </div>
   )
 }
